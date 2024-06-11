@@ -16,6 +16,7 @@
   "dependencies": {
     "ant-design-vue": "^4.2.2",
     "axios": "^1.7.2",
+    "js-cookie": "^3.0.5",
     "pinia": "^2.1.7",
     "vee-validate": "^4.13.1",
     "vue": "^3.4.21",
@@ -35,6 +36,7 @@
     "@vue/tsconfig": "^0.5.1",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.23.0",
+    "husky": "^9.0.11",
     "jsdom": "^24.0.0",
     "less": "^4.2.0",
     "npm-run-all2": "^6.1.2",
@@ -46,5 +48,6 @@
     "vite-plugin-vue-devtools": "^7.0.25",
     "vitest": "^1.4.0",
     "vue-tsc": "^2.0.11"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
