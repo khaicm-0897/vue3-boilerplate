@@ -1,3 +1,4 @@
+import { getAccessToken } from '@/utils';
 import type { RouteRecordRaw } from 'vue-router';
 
 export const publicRoutes: RouteRecordRaw[] = [
@@ -5,7 +6,7 @@ export const publicRoutes: RouteRecordRaw[] = [
     path: '/login',
     name: 'login',
     beforeEnter: (to, from, next) => {
-      if (!localStorage.getItem('access-token')) {
+      if (!getAccessToken()) {
         next();
       } else {
         next({ path: from.fullPath, replace: true });
