@@ -5,10 +5,9 @@ import axios, {
   type AxiosResponse,
   type InternalAxiosRequestConfig,
 } from 'axios';
-import { stringify, type ParsedUrlQueryInput } from 'querystring';
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: process.env.BASE_URL,
+  baseURL: import.meta.env.BASE_URL,
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -55,11 +54,7 @@ export const Get = async <T = any>(
   config?: AxiosRequestConfig,
 ): Promise<T> => {
   try {
-    if (queryParams) {
-      url += `?${stringify(queryParams as unknown as ParsedUrlQueryInput)}`;
-    }
-
-    const response = await axiosInstance.get<T>(url, config);
+    const response = await axiosInstance.get<T>(url, { ...config, params: queryParams });
 
     return response?.data;
   } catch (error: any) {

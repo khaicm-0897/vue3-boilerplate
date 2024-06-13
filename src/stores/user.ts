@@ -1,13 +1,12 @@
 import { defineStore } from 'pinia';
 import { login } from '@/api/user';
 import Cookies from 'js-cookie';
-import type { UserState } from '@/types/User';
+import type { User } from '@/types/user';
 import { setAccessToken } from '@/utils';
 
 export const useUserStore = defineStore('user', {
-  state: (): UserState => ({
-    accessToken: null,
-    refreshToken: null,
+  state: (): User => ({
+    user: {},
   }),
   actions: {
     async login(data: { email: string; password: string }) {
@@ -20,7 +19,7 @@ export const useUserStore = defineStore('user', {
       }
       Cookies.set('refresh_token', response.refresh_token);
     },
-    logout() {
+    async logout() {
       this.accessToken = null;
       this.refreshToken = null;
 

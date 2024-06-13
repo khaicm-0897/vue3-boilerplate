@@ -1,5 +1,7 @@
 import { Get, Post, Put } from '@/plugins/axios';
-import type { LoginData, User } from '@/types/User';
+import type { LoginResponse } from '@/types/auth';
+import type { ResponseSuccess } from '@/types/common';
+import type { LoginData, User } from '@/types/user';
 
 export const getUsers = async (): Promise<User[]> => {
   const response = await Get('/users');
@@ -13,8 +15,8 @@ export const getUser = async (id: number): Promise<User> => {
   return response.data;
 };
 
-export const login = async (data: LoginData): Promise<User> => {
-  const response = await Post(`/users/login`, data);
+export const login = async (data: LoginData): Promise<LoginResponse> => {
+  const response = await Post<ResponseSuccess<LoginResponse>>(`/users/login`, data);
 
   return response?.data;
 };
