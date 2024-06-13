@@ -1,4 +1,5 @@
 <template>
+  <a-typography-title type="warning">LOGIN</a-typography-title>
   <a-form
     :model="formLoginState"
     name="basic"
@@ -9,7 +10,7 @@
     @finishFailed="onFinishFailed"
   >
     <a-form-item
-      label="email"
+      label="Email"
       name="email"
       :validate-status="emailError ? 'error' : ''"
       :help="emailError"
@@ -50,10 +51,10 @@
   </a-form>
 </template>
 <script lang="ts" setup>
-import type { FormLoginState } from '@/types/User';
+import type { FormLoginState } from '@/types/user';
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useUserStore } from '@/stores/user';
+import { useAuthStore } from '@/stores/auth';
 
 const emailError = ref<string | null>(null);
 const passwordError = ref<string | null>(null);
@@ -63,12 +64,14 @@ const formLoginState = reactive<FormLoginState>({
   remember: true,
 });
 
-const userStore = useUserStore();
+const authStore = useAuthStore();
 const router = useRouter();
 
-const onFinish = async (values: FormLoginState) => {
-  await userStore.login(values);
-  console.log('Success:', values);
+const onFinish = async (formLoginState: FormLoginState) => {
+  const result = await authStore.login(formLoginState);
+  if (result.message && authStore.isLoggedIn) {
+    router.push('/home');
+  }
 };
 
 const onFinishFailed = (errorInfo: any) => {

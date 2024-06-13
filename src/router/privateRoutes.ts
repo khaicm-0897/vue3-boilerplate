@@ -1,5 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 
+// Routes that require authentication
 const privateRoutes: RouteRecordRaw[] = [
   {
     path: '/dashboard',

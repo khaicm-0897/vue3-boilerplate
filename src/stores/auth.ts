@@ -3,7 +3,7 @@ import type { FormLoginState } from '@/types/user';
 import { removeAccessToken, removeRefreshToken, setAccessToken, setRefreshToken } from '@/utils';
 import { defineStore } from 'pinia';
 
-interface State {
+interface authState {
   isLoggedIn: boolean;
   accessToken: string | null;
   refreshToken: string | null;
@@ -11,7 +11,7 @@ interface State {
 }
 
 export const useAuthStore = defineStore('auth', {
-  state: (): State => ({
+  state: (): authState => ({
     isLoggedIn: false,
     accessToken: null,
     refreshToken: null,
@@ -20,7 +20,6 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async login(data: FormLoginState) {
       try {
-        this.isLoggedIn = true;
         const response = await login(data);
         this.accessToken = response.accessToken;
         this.refreshToken = response.refreshToken;
@@ -30,8 +29,13 @@ export const useAuthStore = defineStore('auth', {
           setAccessToken(this.accessToken, this.expiresAt);
           setRefreshToken(this.refreshToken);
         }
-      } catch (error) {
+        this.isLoggedIn = true;
+
+        return { success: true };
+      } catch (error: any) {
         this.isLoggedIn = false;
+
+        return { success: false, message: error.message || 'Login failed' };
       }
     },
     logout() {

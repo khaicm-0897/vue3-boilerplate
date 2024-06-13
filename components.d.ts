@@ -26,6 +26,8 @@ declare module 'vue' {
     ARadio: typeof import('ant-design-vue/es')['Radio']
     ASpace: typeof import('ant-design-vue/es')['Space']
     ASubMenu: typeof import('ant-design-vue/es')['SubMenu']
+    ATypographyText: typeof import('ant-design-vue/es')['TypographyText']
+    ATypographyTitle: typeof import('ant-design-vue/es')['TypographyTitle']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']
     IconDocumentation: typeof import('./src/components/icons/IconDocumentation.vue')['default']
