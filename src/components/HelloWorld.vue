@@ -1,15 +1,23 @@
 <template>
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
-    <h3>
-      You’ve successfully created a project with
-      <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
-      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>. What's next?
-    </h3>
+    <h1 class="green">{{ count }}</h1>
+    <button style="margin-left: 10px" @click="increment">{{ $t('increment') }}</button>
+    <button style="margin-left: 10px" @click="decrement">{{ $t('decrement') }}</button>
+    <!-- <div class="locale-changer"> -->
+    <select v-model="$i18n.locale" style="margin-left: 10px">
+      <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">
+        {{ locale }}
+      </option>
+    </select>
+    <!-- </div> -->
   </div>
 </template>
 
 <script setup lang="ts">
+import { useCounter } from '@/composable/useCounter';
+
+const { count, increment, decrement } = useCounter();
 defineProps<{
   msg: string;
 }>();
